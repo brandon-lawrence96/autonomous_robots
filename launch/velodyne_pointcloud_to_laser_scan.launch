@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+ 
+    <node name="pointcloud_to_laserscan_node" pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node"> 
+
+        <remap from="cloud_in" to="/velodyne_points"/>
+        <remap from="scan" to="/velodyne/scan"/>
+
+        <rosparam>
+            target_frame: pointcloud_to_laser_frame
+            transform_tolerance: 0.01
+            min_height: 0.05
+            max_height: 2.50
+
+            angle_min: -3.14159
+            angle_max: 3.14159
+            angle_increment: 0.0087
+            scan_time: 0.3333
+            range_min: 0.7
+            range_max: 100.0
+            use_inf: true
+
+            concurrecy_level: 1
+        </rosparam>
+
+    </node>
+
+    <!-- <node name="pointcloud_to_laserscan_node_2" pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node_2"> 
+
+        <remap from="cloud_in" to="/vision60_2/velodyne_points"/>
+        <remap from="scan" to="/vision60_2/velodyne/scan"/>
+
+        <rosparam>
+            target_frame: vision60_2/pointcloud_to_laser_frame
+            transform_tolerance: 0.01
+            min_height: 0.05
+            max_height: 2.50
+
+            angle_min: -3.14159
+            angle_max: 3.14159
+            angle_increment: 0.0087
+            scan_time: 0.3333
+            range_min: 0.120
+            range_max: 4.0
+            use_inf: true
+
+            concurrecy_level: 1
+        </rosparam>
+
+    </node> -->
+
+</launch>

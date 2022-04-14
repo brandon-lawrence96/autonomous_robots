@@ -1,0 +1,27 @@
+footprint: [[1.00, -0.70], [-1.00, -0.70], [-1.00, 0.65], [1.00, 0.65]]   #for autonomous rack
+#footprint: [[0.28, -0.22], [-0.28, -0.22], [-0.28, 0.20], [0.28, 0.20]]
+
+
+transform_tolerance: 0.35    #0.2
+map_type: costmap
+
+obstacle_range: 3.0
+raytrace_range: 4.0
+ 
+observation_sources: scan
+scan: {sensor_frame: velodyne, data_type: LaserScan, topic: /scan, marking: true, clearing: true}
+
+#The cost at which a cell is considered an obstacle when a map is read from the map_server
+lethal_cost_threshold: 100
+
+cost_scaling_factor:  3.0       #10.0  # exponential rate at which the obstacle cost drops off (default: 10)
+#inflation_radius:     0.2
+inflation_radius:     0.7   #0.15  # max. distance from an obstacle at which costs are incurred for planning paths.
+
+
+
+
+
+
+
+

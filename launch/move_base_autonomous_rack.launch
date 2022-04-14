@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <include file="$(find autonomous_robots)/launch/includes/autonomous_rack_move_base_rtab.launch.xml"/>
+
+</launch>

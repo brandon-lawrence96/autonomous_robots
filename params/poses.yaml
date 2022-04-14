@@ -1,0 +1,55 @@
+point1:
+  position: 
+    x: 1.80248
+    y: -2.0532
+    z: 0.0
+  orientation:
+    x: 0.0  
+    y: 0.0
+    z: 0.70755
+    w: 0.70667
+
+point2:
+  position: 
+    x: 8.7332
+    y: -1.9335
+    z: 0.0
+  orientation:
+    x: 0.0  
+    y: 0.0
+    z: 0.73022
+    w: 0.68321
+
+point3:
+  position: 
+    x: 8.3199
+    y: -4.509
+    z: 0.0
+  orientation:
+    x: 0.0  
+    y: 0.0
+    z: 0.71750
+    w: 0.69656
+
+point4:
+  position: 
+    x: 0.553605
+    y: -4.36308
+    z: 0.0
+  orientation:
+    x: 0.0  
+    y: 0.0
+    z: 0.74894
+    w: 0.66263
+
+point5:
+  position: 
+    x: 7.7002
+    y: -4.6105
+    z: 0.0
+  orientation:
+    x: 0.0  
+    y: 0.0
+    z: 0.76629
+    w: 0.64249
+  

@@ -1,0 +1,9 @@
+<launch>
+  <include file="$(find autonomous_robots)/launch/t265.launch"/>
+
+  <node pkg="tf" type="static_transform_publisher" name="realsense2_camera_manager" args="0 0 0.1 0 0 0 cam_2_link cam_1_link 10">
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find realsense2_camera)/rviz/t265.rviz" required="true" /> 
+
+</launch>

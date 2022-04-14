@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+    <rosparam file="$(find autonomous_robots)/params/autonomous_rack_controller.yaml" command="load"/>
+    
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+      output="screen" ns="/autonomous_rack" 
+      args="flange_1_to_motor_1_joint_position_controller 
+            flange_2_to_motor_2_joint_position_controller
+            flange_3_to_motor_3_joint_position_controller
+            flange_4_to_motor_4_joint_position_controller 
+            joint_state_controller"/>
+
+    <!-- node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard">
+    </node> -->
+
+    <!-- publisher transform (TFs) of all joints and their inbetween relations -->
+    <node pkg= "robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" respawn="false" output="screen">
+      <remap from="/joint_states" to="/autonomous_rack/joint_states" />
+    </node>
+
+</launch>

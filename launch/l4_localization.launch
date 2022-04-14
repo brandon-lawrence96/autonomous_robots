@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <!-- gazebo launch with pre-built world including the spawning of the robot and its URDF information -->
+    <include file ="$(find autonomous_robots)/launch/my_world.launch"/>
+
+    <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard">
+    </node>
+    
+    <!-- using the map we saved earlier -->
+    <arg name="map_file" value="$(find autonomous_robots)/map/my_map_2.yaml"/>
+
+    <!-- Map server package is used to handle the map we saved -->
+    <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)" />
+
+    <!-- Adaptive Monte Carlo node running -->
+    <include file="$(find turtlebot3_navigation)/launch/amcl.launch"/>
+
+    <!-- publisher transform (TFs) of all joints and their inbetween relations -->
+    <node pkg= "robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0"/>
+    </node>
+
+
+</launch>

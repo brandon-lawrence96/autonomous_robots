@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <!-- gazebo launch with pre-built world including the spawning of the robot and its URDF information -->
+    <include file ="$(find autonomous_robots)/launch/realsense_my_world.launch"/>
+
+    <!-- <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard">
+    </node> -->
+
+    <!-- publisher transform (TFs) of all joints and their inbetween relations -->
+    <node pkg= "robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0"/>
+    </node>
+    
+    <!-- arg name="gui" default="True" />
+    <param name="use_gui" value="$(arg gui)" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find realsense2_description)/rviz/urdf.rviz" required="true" /> -->
+    
+</launch>

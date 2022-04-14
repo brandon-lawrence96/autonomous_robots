@@ -1,0 +1,8 @@
+<launch>
+
+  <group ns="/robot_1">
+    <include file="$(find autonomous_robots)/launch/move_baseSafe_rrt.launch">
+    </include> 
+  </group>
+
+</launch>

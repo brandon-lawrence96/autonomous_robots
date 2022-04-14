@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <include file ="$(find autonomous_robots)/launch/l5_path_planning.launch"/>
+
+    <rosparam file="$(find autonomous_robots)/params/poses.yaml" command="load"/>
+
+    <node pkg="autonomous_robots" type="goal_server.py" name="goal" output="screen">
+    </node>
+
+</launch>

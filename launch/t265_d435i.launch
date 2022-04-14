@@ -1,0 +1,8 @@
+<launch>
+    <!-- gazebo launch with pre-built world including the spawning of the robot and its URDF information -->
+    <include file ="$(find autonomous_robots)/launch/t265.launch"/>
+    <include file ="$(find autonomous_robots)/launch/d435i.launch"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="t265_to_d400" args="0 0 0 0 0 0.03 /t265_link /d435i_link 100"/>
+
+</launch>

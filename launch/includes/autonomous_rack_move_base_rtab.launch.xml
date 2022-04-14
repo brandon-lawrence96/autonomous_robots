@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    
+    <!-- <include file ="$(find autonomous_robots)/launch/includes/safety_controller.launch.xml"/>
+    <include file ="$(find autonomous_robots)/launch/includes/velocity_smoother.launch.xml"/> -->
+    <param name="use_sim_time" value="true" />
+
+    <!-- Setting up the move_base node and costmap parameters -->
+    <node pkg="move_base" type="move_base" name="move_base_node" respawn="false" output="screen">
+
+        <!-- <param name="base_global_planner" value="global_planner/GlobalPlanner" /> -->
+        <param name="base_global_planner" value="navfn/NavfnROS"/>
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+
+        <!-- observation sources located in costmap_common.yaml -->
+        <rosparam file="$(find autonomous_robots)/params/ar_costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find autonomous_robots)/params/ar_costmap_common_params.yaml" command="load" ns="local_costmap" />
+
+        <!-- local costmap, needs size -->
+        <rosparam file="$(find autonomous_robots)/params/ar_local_costmap_params.yaml" command="load" />
+
+        <!-- static global costmap, static map provides size -->
+        <rosparam file="$(find autonomous_robots)/params/ar_global_costmap_params.yaml" command="load"/>
+
+		<!-- <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" /> -->
+
+        <rosparam file="$(find autonomous_robots)/params/ar_dwa_local_planner_params.yaml" command="load"/>
+	
+        <!-- <rosparam file="$(find autonomous_robots)/params/ar_teb_local_planner_params.yaml" command="load"/> -->
+        <rosparam file="$(find autonomous_robots)/params/ar_global_planner.yaml" command="load"/> 
+        <rosparam file="$(find autonomous_robots)/params/ar_move_base_params.yaml" command="load"/>
+
+        <param name="global_costmap/global_frame" value="map"/>
+        <param name="global_costmap/robot_base_frame" value="base_footprint"/>
+
+        <param name="local_costmap/global_frame" value="odom"/>
+        <param name="local_costmap/robot_base_frame" value="base_footprint"/>
+
+        <param name="DWAPlannerROS/global_frame_id" value="odom"/>
+
+        <remap from="cmd_vel" to="/cmd_vel"/>
+        <remap from="odom" to="odom"/>
+        <remap from="scan" to="scan"/>
+
+
+    </node>
+
+</launch>

@@ -1,0 +1,37 @@
+<launch>
+  <arg name="serial_no"           default="017322071066"/>
+  <arg name="device_type"         default="d435i"/>
+  <arg name="json_file_path"      default=""/>
+  <arg name="camera"              default="d435i_2"/>
+  <arg name="tf_prefix"           default="$(arg camera)"/>
+  <arg name="initial_reset"             default="false"/>
+  <arg name="color_width"               default="640"/>
+  <arg name="color_height"              default="480"/>
+  <arg name="depth_width"               default="640"/>
+  <arg name="depth_height"              default="480"/>
+  <arg name="clip_distance"             default="-2"/>
+  
+  <group ns="$(arg camera)">
+    <include file="$(find autonomous_robots)/launch/includes/d435i_nodelet.launch.xml">
+      <arg name="tf_prefix"                value="$(arg tf_prefix)"/>
+      <arg name="serial_no"                value="$(arg serial_no)"/>
+      <arg name="device_type"              value="$(arg device_type)"/>
+      <arg name="initial_reset"         value="$(arg initial_reset)"/>
+      <arg name="align_depth"           value="true"/>
+      <arg name="filters"               value="pointcloud"/>
+      <arg name="color_width"           value="$(arg color_width)"/>
+      <arg name="color_height"          value="$(arg color_height)"/>
+      <arg name="depth_width"           value="$(arg depth_width)"/>
+      <arg name="depth_height"          value="$(arg depth_height)"/>
+      <arg name="clip_distance"         value="$(arg clip_distance)"/>
+    </include>
+  </group>
+
+  <!--<node pkg="tf" type="static_transform_publisher" name="d435i_1_to_d435i_2" args="-0.04 -0.13 0 -0.5585 0 0 /d435i_link /d435i_2_link 100"/> -->
+ <!-- <node pkg="tf" type="static_transform_publisher" name="map_to_t265_odom_frame" args="0 0 -0.238 0 0 0 /t265_odom_frame /odom 100"/>
+ <node pkg="tf" type="static_transform_publisher" name="t265_pose_to_base_link" args="-0.50 0 -0.238 0 0 0 /t265_pose_frame /base_link 100"/>
+ <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_footprint" args="0 0 -0.185 0 0 0 /base_link /base_footprint 100"/>
+ <node pkg="tf" type="static_transform_publisher" name="t265_to_d435i" args="0 0 0.32 0 0 0 /t265_link /d435i_link 100"/> 
+ <node pkg="tf" type="static_transform_publisher" name="d435i_to_lidar" args="-0.114 0 -0.218 0 0 0 /d435i_link /velodyne 100"/> 
+ <node pkg="autonomous_robots" name="t265_odom_converter" type="t265_odom_converter.py" output="screen"/> -->
+</launch>

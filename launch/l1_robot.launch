@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <!-- gazebo launch with empty world -->
+    <include file ="$(find gazebo_ros)/launch/empty_world.launch"/>
+    
+    <!-- uploading urdf robot model into paramter server -->
+    <param name="robot_description" command="$(find xacro)/xacro '$(find autonomous_robots)/urdf/2_turtlebot3_waffle_pi.urdf.xacro'" />"
+    
+
+    <!-- from paramter server spawn model into gazebo -->
+    <node pkg= "gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_waffle_pi -param robot_description">
+    </node>
+
+    <!-- publisher transform (TFs) of all joints and their inbetween relations -->
+    <node pkg= "robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0"/>
+    </node>
+
+    <!-- running the node to move the robot using the keyboard -->
+    <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard">
+    </node>
+
+</launch>

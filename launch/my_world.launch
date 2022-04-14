@@ -1,0 +1,97 @@
+<launch>
+  <!-- <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="x_pos" default="-2.0"/>
+  <arg name="y_pos" default="-0.5"/> -->
+  <arg name="z_pos" default="0.0"/> 
+  <arg name="robot_name" value="autonomous_rack"/> 
+  <!-- <arg name="robot_name" value="nexus_4wd_mecanum"/> -->
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find autonomous_robots)/world/hospital_simplified.world"/>
+    <!-- <arg name="world_name" value="$(find autonomous_robots)/world/dso_review_location_with_ramp.world"/> -->
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- <param name="robot_description" command="$(find xacro)/xacro '$(find autonomous_robots)/urdf/2_turtlebot3_waffle_pi.urdf.xacro'" /> -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find autonomous_rack)/urdf/autonomous_rack.urdf.xacro'" /> 
+  <!-- <param name="robot_description" command="$(find xacro)/xacro '$(find nexus_4wd_mecanum_description)/urdf/nexus_4wd_mecanum.xacro'" /> -->
+  <!-- <param name="rack" command="$(find xacro)/xacro '$(find Mobile_storage_rack)/urdf/Mobile_storage_rack.urdf'" />"
+  <param name="rack2" command="$(find xacro)/xacro '$(find Mobile_storage_rack)/urdf/Mobile_storage_rack_2.urdf'" />" -->
+
+
+  <!--<node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"  args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" /> -->
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"  args="-urdf -model autonomous_rack -x -2.0 -y -0.5 -z $(arg z_pos) -param robot_description" /> 
+  <node name="base_footprint_to_pointcloud_to_laser_frame" pkg="tf" type="static_transform_publisher" args="0 0 0.05 0 0 0 base_footprint pointcloud_to_laser_frame 100" />
+  <!--<node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"  args="-urdf -model nexus_4wd_mecanum -x -2.0 -y -0.5 -z $(arg z_pos) -param robot_description" />  -->
+  <!-- <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_2"  args="-urdf -model Mobile_storage_rack -x $(arg x_pos) -y 1.0 -z $(arg z_pos) -param rack" /> 
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_3"  args="-urdf -model Mobile_storage_rack_2 -x -0.4 -y 1.0 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_4"  args="-urdf -model Mobile_storage_rack_3 -x 1.2 -y 1.0 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_5"  args="-urdf -model Mobile_storage_rack_4 -x -3.6 -y 1.0 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_6"  args="-urdf -model Mobile_storage_rack_5 -x -5.2 -y 1.0 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_7"  args="-urdf -model Mobile_storage_rack_6 -x -6.8 -y 1.0 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_8"  args="-urdf -model Mobile_storage_rack_7 -x -8.4 -y 1.0 -z $(arg z_pos) -param rack" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_9"  args="-urdf -model Mobile_storage_rack_8 -x $(arg x_pos) -y 1.8 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_10"  args="-urdf -model Mobile_storage_rack_9 -x -0.4 -y 1.8 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_11"  args="-urdf -model Mobile_storage_rack_10 -x 1.2 -y 1.8 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_12"  args="-urdf -model Mobile_storage_rack_11 -x -3.6 -y 1.8 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_13"  args="-urdf -model Mobile_storage_rack_12 -x -5.2 -y 1.8 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_14"  args="-urdf -model Mobile_storage_rack_13 -x -6.8 -y 1.8 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_15"  args="-urdf -model Mobile_storage_rack_14 -x -8.4 -y 1.8 -z $(arg z_pos) -param rack" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_16"  args="-urdf -model Mobile_storage_rack_15 -x $(arg x_pos) -y 3.9 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_17"  args="-urdf -model Mobile_storage_rack_16 -x -0.4 -y 3.9 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_18"  args="-urdf -model Mobile_storage_rack_17 -x 1.2 -y 3.9 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_19"  args="-urdf -model Mobile_storage_rack_18 -x -3.6 -y 3.9 -z $(arg z_pos) -param rack" />
+  
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_20"  args="-urdf -model Mobile_storage_rack_19 -x 4.7 -y 3.9 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_21"  args="-urdf -model Mobile_storage_rack_20 -x 6.3 -y 3.9 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_22"  args="-urdf -model Mobile_storage_rack_21 -x 7.9 -y 3.9 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_23"  args="-urdf -model Mobile_storage_rack_22 -x 9.5 -y 3.9 -z $(arg z_pos) -param rack" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_24"  args="-urdf -model Mobile_storage_rack_23 -x -6.8 -y 3.9 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_25"  args="-urdf -model Mobile_storage_rack_24 -x -8.4 -y 3.9 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_26"  args="-urdf -model Mobile_storage_rack_25 -x -10.0 -y 3.9 -z $(arg z_pos) -param rack" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_27"  args="-urdf -model Mobile_storage_rack_26 -x 4.7 -y 1.58 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_28"  args="-urdf -model Mobile_storage_rack_27 -x 6.3 -y 1.58 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_29"  args="-urdf -model Mobile_storage_rack_28 -x 7.9 -y 1.58 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_30"  args="-urdf -model Mobile_storage_rack_29 -x 9.5 -y 1.58 -z $(arg z_pos) -param rack" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_31"  args="-urdf -model Mobile_storage_rack_30 -x 4.7 -y 0.78 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_32"  args="-urdf -model Mobile_storage_rack_31 -x 6.3 -y 0.78 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_33"  args="-urdf -model Mobile_storage_rack_32 -x 7.9 -y 0.78 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_34"  args="-urdf -model Mobile_storage_rack_33 -x 9.5 -y 0.78 -z $(arg z_pos) -param rack" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_39"  args="-urdf -model Mobile_storage_rack_38 -x 4.7 -y -1.54 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_40"  args="-urdf -model Mobile_storage_rack_39 -x 6.3 -y -1.54 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_41"  args="-urdf -model Mobile_storage_rack_40 -x 7.9 -y -1.54 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_42"  args="-urdf -model Mobile_storage_rack_41 -x 9.5 -y -1.54 -z $(arg z_pos) -param rack" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_35"  args="-urdf -model Mobile_storage_rack_34 -x 4.7 -y -2.34 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_36"  args="-urdf -model Mobile_storage_rack_35 -x 6.3 -y -2.34 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_37"  args="-urdf -model Mobile_storage_rack_36 -x 7.9 -y -2.34 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_38"  args="-urdf -model Mobile_storage_rack_37 -x 9.5 -y -2.34 -z $(arg z_pos) -param rack" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_43"  args="-urdf -model Mobile_storage_rack_42 -x $(arg x_pos) -y -1.32 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_44"  args="-urdf -model Mobile_storage_rack_43 -x -0.4 -y -1.32 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_45"  args="-urdf -model Mobile_storage_rack_44 -x -3.6 -y -1.32 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_46"  args="-urdf -model Mobile_storage_rack_45 -x -5.2 -y -1.32 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_47"  args="-urdf -model Mobile_storage_rack_46 -x -6.8 -y -1.32 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_48"  args="-urdf -model Mobile_storage_rack_47 -x -8.4 -y -1.32 -z $(arg z_pos) -param rack" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_49"  args="-urdf -model Mobile_storage_rack_48 -x -3.6 -y -5.42 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_50"  args="-urdf -model Mobile_storage_rack_49 -x -5.2 -y -5.42 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_51"  args="-urdf -model Mobile_storage_rack_50 -x -6.8 -y -5.42 -z $(arg z_pos) -param rack" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_52"  args="-urdf -model Mobile_storage_rack_51 -x -8.4 -y -5.42 -z $(arg z_pos) -param rack" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf_53"  args="-urdf -model Mobile_storage_rack_52 -x 1.2 -y -5.92 -z $(arg z_pos) -param rack2" /> -->
+
+
+  
+  
+</launch>
